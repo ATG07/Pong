@@ -1,0 +1,36 @@
+# =============== #
+# Unity generated #
+# =============== #
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+
+# ============ #
+# Unity assets #
+# ============ #
+
+# Ignore auto-generated JetBrains Rider / Visual Studio files
+.vs/
+.idea/
+*.sln
+*.csproj
+*.unityproj
+*.user
+*.userprefs
+
+# ========== #
+# OS junk    #
+# ========== #
+.DS_Store
+Thumbs.db
+
+# ============== #
+# Package Cache  #
+# ============== #
+Packages/com.unity.package-manager.cache/
