@@ -12,6 +12,9 @@ public class Controller : MonoBehaviour
     private Collider2D wall_Top;
     private Collider2D wall_Down;
 
+    private bool isUpPressed;
+    private bool isDownPressed;
+
     void Start()
     {
         direction = 0;
@@ -19,35 +22,19 @@ public class Controller : MonoBehaviour
         wall_Top = GameObject.Find("Wall_Top").GetComponent<Collider2D>();
         wall_Down = GameObject.Find("Wall_Down").GetComponent<Collider2D>();
 
-        Debug.Log(wall_Top);
-        Debug.Log(wall_Down);
+        isUpPressed = false;
+        isDownPressed = false;
     }
 
     void Update(){
         if (WASD)
         {
-            if (Input.GetKeyDown("w"))
-            {
-                direction = 1;
-            }
-            else if (Input.GetKeyDown("s"))
-            {
-                direction = -1;
-            }
+            CheckInputs("w","s");
         }
         else
         {
-            if (Input.GetKeyDown("up"))
-            {
-                direction = 1;
-            }
-            else if (Input.GetKeyDown("down"))
-            {
-                direction = -1;
-            }
-        }
-
-        
+            CheckInputs("up", "down");
+        }        
 
         if (paddle.IsTouching(wall_Top))
         {
@@ -59,6 +46,38 @@ public class Controller : MonoBehaviour
         }
 
         paddle.linearVelocity = new Vector2(0, direction * speed);
+    }
+
+    private void CheckInputs(string up, string down){
+        if (Input.GetKeyDown(up))
+        {
+            isUpPressed = true;
+        }
+        if (Input.GetKeyDown(down))
+        {
+            isDownPressed = true;
+        }
+        if (Input.GetKeyUp(up))
+        {
+            isUpPressed = false;
+        }
+        if (Input.GetKeyUp(down))
+        {
+            isDownPressed = false;
+        }
+
+        if (isUpPressed)
+        {
+            direction = 1;
+        }
+        else if (isDownPressed)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = 0;
+        }
     }
 
     public void SetUpController(float paddleSpeed, bool isWASD, Rigidbody2D rb){
