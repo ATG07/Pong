@@ -22,12 +22,24 @@ public class MenuManager : MonoBehaviour
     public AudioClip GameSoundtrack;
     public AudioClip GameOverTrack;
 
+    public static MenuManager Instance { get; private set; }
+
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         Instantiate(Main_Menu_UI, new Vector3(0, 0, 0), Quaternion.identity);
         PlayMusic(MainMenuTrack);
+
+        
     }
 
     void Start()
